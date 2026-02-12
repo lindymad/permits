@@ -14,79 +14,82 @@
 </head>
 <body>
 <main>
-<span class="help-wrapper" data-fancybox src="#helptext"><a class="help">?</a></span>
-<span class="github-wrapper"><a href="https://github.com/lindymad/permits" target="_blank"><img alt="Github Logo"
-                                                                                                src="github-mark.png"
-                                                                                                class="github-logo"></a></span>
-<h1 id="permits-header">Permits
-    <button id="add-permit" data-fancybox src="#addeditformwrapper">Add</button>
-    <button id="export-permits">Export</button>
-    <button id="import-permits">Import</button>
-</h1>
+    <span class="help-wrapper" data-fancybox src="#helptext"><a class="help">?</a></span>
+    <span class="github-wrapper"><a href="https://github.com/lindymad/permits" target="_blank"><img alt="Github Logo"
+                                                                                                    src="github-mark.png"
+                                                                                                    class="github-logo"></a></span>
+    <h1 id="permits-header">Permits
+        <button id="add-permit" data-fancybox src="#addeditformwrapper">Add</button>
+        <button id="export-permits">Export</button>
+        <button id="import-permits">Import</button>
+    </h1>
 
-<div class="tabs-wrapper">
-    <div class="tabs">
-        <div class="tab frequent active">Frequent</div>
-        <div class="tab occasional">Occasional</div>
-        <div class="tab filter"><input id="filter" placeholder="Filter" type="text"></div>
-    </div>
-    <div class="content">
-        <div id="permits-list"></div>
-    </div>
-</div>
-<div id="addeditformwrapper" style="display:none;">
-    <form action="#" id="addeditform">
-        <input type="hidden" id="addEditIsNew" value="">
-        <div class="row"><label for="addEditName">Name</label><input type="text" id="addEditName"></div>
-        <div class="row"><label for="addEditNumberPlate">Numberplate</label><input type="text" id="addEditNumberPlate">
+    <div class="tabs-wrapper">
+        <div class="tabs">
+            <div class="tab frequent active">Frequent</div>
+            <div class="tab occasional">Occasional</div>
+            <div class="tab filter"><input id="filter" placeholder="Filter" type="text"></div>
         </div>
-        <div class="row"><label for="addEditUsage">Usage</label><select id="addEditUsage">
-            <option value="frequent">Frequent</option>
-            <option value="occasional">Occasional</option>
-        </select></div>
-        <div class="row buttons-row"><input type="submit" value="Save" class="saveEntry"> <input type="reset"
-                                                                                                 value="Clear"
-                                                                                                 class="clearEntry">
-            <input type="button" value="Cancel" data-fancybox-close class="cancelEntry"></div>
-    </form>
-</div>
-<div id="importEntries" style="display:none;">
+        <div class="content">
+            <div id="permits-list"></div>
+        </div>
+    </div>
+    <div id="addeditformwrapper" style="display:none;">
+        <form action="#" id="addeditform">
+            <input type="hidden" id="addEditIsNew" value="">
+            <div class="row"><label for="addEditName">Name</label><input type="text" id="addEditName"></div>
+            <div class="row"><label for="addEditNumberPlate">Numberplate</label><input type="text"
+                                                                                       id="addEditNumberPlate">
+            </div>
+            <div class="row"><label for="addEditUsage">Usage</label><select id="addEditUsage">
+                <option value="frequent">Frequent</option>
+                <option value="occasional">Occasional</option>
+            </select></div>
+            <div class="row buttons-row"><input type="submit" value="Save" class="saveEntry"> <input type="reset"
+                                                                                                     value="Clear"
+                                                                                                     class="clearEntry">
+                <input type="button" value="Cancel" data-fancybox-close class="cancelEntry"></div>
+        </form>
+    </div>
+    <div id="importEntries" style="display:none;">
 
-</div>
-<div id="deleteEntry" style="display:none;">
-    <h2>Are you sure you want to delete this entry?</h2>
-    <p>Name: <strong class='delete-confirm-name'></strong></p>
-    <p>Numberplate: <strong class='delete-confirm-numberplate'></strong></p>
-    <div class="row buttons-row"><input class="danger delete-entry-for-sure" type="button" value="Yes"><input
-            type="button" class="cancel" data-fancybox-close value="No"></div>
-</div>
-<div id="helptext" style="display:none;">
-    <h1>Help</h1>
-    <h2>What is this?</h2>
-    <p>The neighbourhood where my Mum lives recently implemented digital permitting, which means that when someone
-        comes to visit, she has to enter their numberplate into a permitting system on her ipad.</p>
-    <p>The app she uses to do this does not keep a history of number plates, or allow the number plate to be named,
-        so she constantly had to re-ask people what their numberplates are.</p>
-    <p>I made this app so that she could have a history of numberplates for when her friends and family come to
-        visit.</p>
-    <h2>How do I use it?</h2>
-    <p>Simply click the "Add" button on the main page to add numberplates. The name and numberplate are stored
-        directly in your browser, which means you will only see them when you open this page with this browser
-        on this device.</p>
-    <p>Once you have added your numberplates, click on a numberplate to copy it and you can paste it into your permits
-        app</p>
-    <p>You can also edit and delete your numberplates</p>
-    <p>You can manually export your data and import it into another browser/device by clicking on the export button.</p>
-    <h2>Is my data safe?</h2>
-    <p>Yes. This system runs directly on github using the code at
-        <a href="https://github.com/lindymad/permits" target="_blank">https://github.com/lindymad/permits</a>.
-        All of your data is saved in your browser. We recommend exporting your data whenever you make a change and
-        keeping it somewhere safe, just in case you lose access to the browser or device.</p>
-    <p>You can access this page from any browser on any device, but you will only see data that you have added (or
-        imported) on that browser and device.</p>
-</div>
+    </div>
+    <div id="deleteEntry" style="display:none;">
+        <h2>Are you sure you want to delete this entry?</h2>
+        <p>Name: <strong class='delete-confirm-name'></strong></p>
+        <p>Numberplate: <strong class='delete-confirm-numberplate'></strong></p>
+        <div class="row buttons-row"><input class="danger delete-entry-for-sure" type="button" value="Yes"><input
+                type="button" class="cancel" data-fancybox-close value="No"></div>
+    </div>
+    <div id="helptext" style="display:none;">
+        <h1>Help</h1>
+        <h2>What is this?</h2>
+        <p>The neighbourhood where my Mum lives recently implemented digital permitting, which means that when someone
+            comes to visit, she has to enter their numberplate into a permitting system on her ipad.</p>
+        <p>The app she uses to do this does not keep a history of number plates, or allow the number plate to be named,
+            so she constantly had to re-ask people what their numberplates are.</p>
+        <p>I made this app so that she could have a history of numberplates for when her friends and family come to
+            visit.</p>
+        <h2>How do I use it?</h2>
+        <p>Simply click the "Add" button on the main page to add numberplates. The name and numberplate are stored
+            directly in your browser, which means you will only see them when you open this page with this browser
+            on this device.</p>
+        <p>Once you have added your numberplates, click on a numberplate to copy it and you can paste it into your
+            permits
+            app</p>
+        <p>You can also edit and delete your numberplates</p>
+        <p>You can manually export your data and import it into another browser/device by clicking on the export
+            button.</p>
+        <h2>Is my data safe?</h2>
+        <p>Yes. This system runs directly on github using the code at
+            <a href="https://github.com/lindymad/permits" target="_blank">https://github.com/lindymad/permits</a>.
+            All of your data is saved in your browser. We recommend exporting your data whenever you make a change and
+            keeping it somewhere safe, just in case you lose access to the browser or device.</p>
+        <p>You can access this page from any browser on any device, but you will only see data that you have added (or
+            imported) on that browser and device.</p>
+    </div>
+</main>
 <script defer src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@6.1/dist/fancybox/fancybox.umd.js"></script>
 <script defer src="permits.js"></script>
-</main>
 </body>
 </html>
