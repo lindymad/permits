@@ -84,6 +84,11 @@ button {
   height: 1.2em;
   }
 }
+#qrcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 #qrcode img {
   max-width: 60vw;
