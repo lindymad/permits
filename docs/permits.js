@@ -46,7 +46,6 @@ tabs.addEventListener("click", function (e) {
 });
 
 function saveNumberplate(name, numberplate, usage, id) {
-    console.log("SAVE", name, numberplate, usage, id);
     let currData = JSON.parse(window.localStorage.getItem("permitsData"));
     if (typeof currData === "undefined" || !currData) {
         currData = [];
@@ -121,38 +120,50 @@ function getNumberplates() {
         currData = [];
     }
     document.getElementById("permits-list").innerHTML = "";
-    for (let entry of currData) {
+    if (currData.length===0) {
         let div = document.createElement("div");
-        div.classList.add("usage-" + entry.usage);
-        div.classList.add("entry");
-        div.dataset.id=typeof entry.id === "undefined"?"":entry.id;
-        if (getUsage() && getUsage() !== entry.usage) {
-            div.classList.add("hidden");
-        }
-        let np = document.createElement("div");
-        np.classList.add("entry-numberplate");
-        np.classList.add("copy");
-        np.innerText = entry.numberplate;
-        let name = document.createElement("div");
-        name.classList.add("entry-name");
-        name.innerText = entry.name;
-        let actions = document.createElement("div");
-        actions.classList.add("entry-actions");
-        let edit = document.createElement("button");
-        edit.classList.add("edit-entry");
-        edit.innerText = "Edit";
-        let deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete-entry");
-        deleteButton.innerText = "Delete";
-        deleteButton.setAttribute("src", "#deleteEntry");
-        deleteButton.dataset.fancybox = false;
+        div.innerHTML="<em>You have not yet added any permits</em>";
+        div.classList.add("usage-frequent");
+            div.classList.add("usage-occasional");
+            div.classList.add("no-records");
 
-        actions.appendChild(edit);
-        actions.appendChild(deleteButton);
-        div.appendChild(name);
-        div.appendChild(np);
-        div.appendChild(actions);
         document.getElementById("permits-list").appendChild(div);
+    }
+    else {
+
+        for (let entry of currData) {
+            let div = document.createElement("div");
+            div.classList.add("usage-" + entry.usage);
+            div.classList.add("entry");
+            div.dataset.id=typeof entry.id === "undefined"?"":entry.id;
+            if (getUsage() && getUsage() !== entry.usage) {
+                div.classList.add("hidden");
+            }
+            let np = document.createElement("div");
+            np.classList.add("entry-numberplate");
+            np.classList.add("copy");
+            np.innerText = entry.numberplate;
+            let name = document.createElement("div");
+            name.classList.add("entry-name");
+            name.innerText = entry.name;
+            let actions = document.createElement("div");
+            actions.classList.add("entry-actions");
+            let edit = document.createElement("button");
+            edit.classList.add("edit-entry");
+            edit.innerText = "Edit";
+            let deleteButton = document.createElement("button");
+            deleteButton.classList.add("delete-entry");
+            deleteButton.innerText = "Delete";
+            deleteButton.setAttribute("src", "#deleteEntry");
+            deleteButton.dataset.fancybox = false;
+
+            actions.appendChild(edit);
+            actions.appendChild(deleteButton);
+            div.appendChild(name);
+            div.appendChild(np);
+            div.appendChild(actions);
+            document.getElementById("permits-list").appendChild(div);
+        }
     }
     if (document.querySelector(".tabs > div.active input")) {
         document.querySelector(".tabs > div.active input").dispatchEvent(new Event("input"));
@@ -267,11 +278,11 @@ document.addEventListener("click", function (e) {
         document.getElementById("addEditUsage").value = usage;
         document.getElementById("add-permit").click();
     } else if (e.target.classList.contains("delete-entry-for-sure")) {
-        let numberPlate = document.querySelector(".delete-confirm-numberplate").innerText;
+        let id = document.getElementById("delete-confirm-id").value;
         let currData = JSON.parse(window.localStorage.getItem("permitsData"));
         let newData = [];
         for (let entry of currData) {
-            if (entry.numberplate !== numberPlate) {
+            if (entry.id !== id) {
                 newData.push(entry);
             }
         }
@@ -298,10 +309,12 @@ document.addEventListener("click", function (e) {
             }, {once: true}); // { once: true } auto-removes the listener after it runs
 
         }, 2000);
+        document.getElementById("delete-confirm-id").value = "";
         document.querySelector(".delete-confirm-name").innerText = "";
         document.querySelector(".delete-confirm-numberplate").innerText = "";
         getNumberplates();
     } else if (e.target.classList.contains("delete-entry")) {
+        document.getElementById("delete-confirm-id").value = e.target.closest(".entry").dataset.id;
         document.querySelector(".delete-confirm-name").innerText = e.target.closest(".entry").querySelector(".entry-name").innerText;
         document.querySelector(".delete-confirm-numberplate").innerText = e.target.closest(".entry").querySelector(".entry-numberplate").innerText;
     } else if (e.target.id === "add-permit") {
