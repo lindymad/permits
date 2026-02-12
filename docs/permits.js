@@ -148,9 +148,21 @@ function getNumberplates() {
 }
 
 document.getElementById("addeditform").addEventListener("submit", function () {
-    saveNumberplate(document.getElementById("addEditName").value, document.getElementById("addEditNumberPlate").value, document.getElementById("addEditUsage").value);
-    document.getElementById('addeditform').reset();
-    getNumberplates();
+    let error="";
+    if (!document.getElementById("addEditName").value) {
+        error+="You must enter a name.\n";
+    }
+    if (!document.getElementById("addEditNumberPlate").value) {
+        error+="You must enter a numberplate.\n";
+    }
+    if (error) {
+        alert(error);
+    }
+    else {
+        saveNumberplate(document.getElementById("addEditName").value, document.getElementById("addEditNumberPlate").value, document.getElementById("addEditUsage").value);
+        document.getElementById('addeditform').reset();
+        getNumberplates();
+    }
 });
 
 function htmlEntities(str) {
