@@ -34,7 +34,8 @@ button {
 
 .entry-actions {
   display: flex;
-  gap: 20px; }
+  gap: 20px;
+  align-items: center; }
 
 .entry-actions button {
   font-size: 1em; }
@@ -92,8 +93,10 @@ button {
   justify-content: center; }
 
 #helptext {
-  width: 50vw;
-  min-width: 40em; }
+  max-width: 50em !important;
+  padding: 10px 20px; }
+  #helptext h1 {
+    margin-top: 0; }
 
 #addform {
   width: 50vw;

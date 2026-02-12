@@ -53,6 +53,7 @@ button {
 .entry-actions {
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
 .entry-actions button {
@@ -127,8 +128,12 @@ button {
 }
 
 #helptext {
-  width: 50vw;
-  min-width: 40em;
+
+  max-width: 50em !important;
+  padding: 10px 20px;
+  h1 {
+    margin-top:0;
+  }
 }
 
 #addform {
