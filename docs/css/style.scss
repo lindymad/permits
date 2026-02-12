@@ -72,19 +72,22 @@ button {
 
   }
 }
-.qr-wrapper  {
-   z-index: 10;
+
+.qr-wrapper {
+  z-index: 10;
   position: absolute;
   top: 11px;
   right: 82px;
   cursor: pointer;
   width: 1.2em;
   height: 1.2em;
+
   img {
     width: 1.2em;
-  height: 1.2em;
+    height: 1.2em;
   }
 }
+
 #qrcode {
   display: flex;
   flex-direction: column;
@@ -181,6 +184,12 @@ h1 {
   position: relative;
 }
 
+h1 .buttons {
+
+  display: inline-block;
+
+}
+
 .entry-numberplate {
   color: blue;
   cursor: pointer;
@@ -243,11 +252,12 @@ h1 {
   }
   .tabs .tab.filter {
     position: absolute;
-    top:-18px;
-    left:0;
+    top: -18px;
+    left: 0;
     border-radius: 0;
     width: calc(100vw - 30px);
-    padding:0 !important;
+    padding: 0 !important;
+
     input {
       width: 100% !important;
     }

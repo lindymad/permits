@@ -134,6 +134,9 @@ h1 {
   margin-top: 10px;
   position: relative; }
 
+h1 .buttons {
+  display: inline-block; }
+
 .entry-numberplate {
   color: blue;
   cursor: pointer;
