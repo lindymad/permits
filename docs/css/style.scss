@@ -182,7 +182,12 @@ form .row {
     font-size: 1em;
   }
 }
-
+#permits-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
 #permits-list {
   display: flex;
   flex-direction: column;
@@ -206,7 +211,10 @@ h1 {
 
 h1 .buttons {
 
-  display: inline-block;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 
 }
 
@@ -263,6 +271,12 @@ h1 .buttons {
   display: none !important;
 }
 
+@media (max-width: 322px) {
+  h1 .buttons {
+    margin-top: -18px;
+    padding-bottom: 10px;
+  }
+}
 @media (max-width: 768px) {
   h1 {
     margin-top: 30px;
