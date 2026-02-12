@@ -103,20 +103,20 @@ button {
   min-width: 40em; }
 
 form .row {
-  margin: 10px 0 30px 0; }
+  margin: 0 0 15px 0; }
   form .row label {
     margin-right: 10px; }
 
 #addeditformwrapper {
-  padding: 30px;
+  padding: 20px 20px 10px;
   border-radius: 10px; }
 
 .buttons-row {
   margin-top: 20px;
-  border-top: 1px solid #333;
-  padding-top: 20px;
+  border-top: 1px solid #aaa;
+  padding-top: 10px;
   display: flex;
-  gap: 20px;
+  gap: 10px;
   align-content: center;
   justify-content: flex-end; }
   .buttons-row button {
