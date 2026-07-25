@@ -495,3 +495,35 @@ Fancybox.bind("[data-fancybox]", {
     height: 500,
     'showNavArrows': false
 });
+
+// --- soft-keyboard fixes: append to the end of permits.js ---
+
+// Keep the add/edit dialog usable while an on-screen keyboard that overlays
+// the page (iOS/iPadOS) is open: track the visual viewport (the part of the
+// page not covered by the keyboard) in CSS variables and a class that
+// css/style.css applies to the dialog.
+if (window.visualViewport) {
+    const applyVisualViewport = function () {
+        const vv = window.visualViewport;
+        const root = document.documentElement.style;
+        if (vv.height < window.innerHeight - 50) {
+            root.setProperty("--vvh", vv.height + "px");
+            root.setProperty("--vvt", vv.offsetTop + "px");
+            document.documentElement.classList.add("kb-open");
+        } else {
+            root.removeProperty("--vvh");
+            root.removeProperty("--vvt");
+            document.documentElement.classList.remove("kb-open");
+        }
+    };
+    window.visualViewport.addEventListener("resize", applyVisualViewport);
+    window.visualViewport.addEventListener("scroll", applyVisualViewport);
+}
+
+// When a form field gains focus, scroll it into the visible area once the
+// keyboard has started to appear
+document.getElementById("addeditform").addEventListener("focusin", function (e) {
+    setTimeout(function () {
+        e.target.scrollIntoView({block: "center"});
+    }, 300);
+});

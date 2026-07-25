@@ -773,3 +773,45 @@ input[type=reset] {
 #addEditNumberPlate {
     text-transform: uppercase;
 }
+
+/* --- soft-keyboard fixes: append to the end of css/style.css --- */
+
+/* 16px inputs stop iOS Safari zooming into focused fields */
+input[type="text"],
+select {
+    font: inherit;
+}
+
+/* When there is little vertical room (e.g. a keyboard that resizes the
+   layout, or a small landscape window), anchor dialog content to the top
+   and let it scroll so every field can be reached */
+@media (max-height: 500px) {
+    .fancybox__slide {
+        overflow-y: auto;
+        justify-content: flex-start;
+    }
+
+    .fancybox__slide > * {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Keyboards that overlay the page instead (iOS/iPadOS): permits.js adds
+   html.kb-open and sets --vvh/--vvt from the visualViewport; pin the
+   Fancybox dialog to the visible part of the page */
+html.kb-open .fancybox__dialog {
+    top: var(--vvt, 0px) !important;
+    height: var(--vvh, 100dvh) !important;
+    touch-action: pan-y;
+}
+
+html.kb-open .fancybox__slide {
+    overflow-y: auto;
+    justify-content: flex-start;
+}
+
+html.kb-open .fancybox__slide > * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
