@@ -29,6 +29,7 @@
     let savedNoRecords = null;
     let initialTab = null;
     let initialFilter = "";
+    let initialScrollY = 0;
     let ui = null, blocker = null, spot = null, tip = null;
 
     const timers = [];
@@ -329,6 +330,8 @@
         "  max-height: none; margin: 0; border: 0; padding: 0; background: transparent; " +
         "  overflow: visible; }" +
         "dialog#pg-ui::backdrop { background: transparent; }" +
+        // extra scroll room so a target can always be scrolled clear of the tooltip
+        "html.pg-active body { padding-bottom: 60vh !important; }" +
         ".pg-blocker { position: fixed; inset: 0; z-index: " + Z + "; background: rgba(10,10,10,0); " +
         "  transition: background .25s ease; -webkit-tap-highlight-color: transparent; }" +
         ".pg-blocker.pg-dim { background: rgba(10,10,10,.55); }" +
@@ -362,6 +365,18 @@
         "html.dark .pg-btns .pg-next { background: var(--dark-accent, #e5e7eb); color: #111; " +
         "  border-color: var(--dark-accent, #e5e7eb); }" +
         ".pg-btns .pg-back:disabled { opacity: .4; cursor: default; }" +
+        ".pg-body { max-height: 45vh; overflow-y: auto; }" +
+        // on short screens, pull the Fancybox slide content up during the tour so
+        // the tooltip (pinned at the bottom) covers as little of the form as possible
+        "@media (max-height: 700px) { " +
+        "  html.pg-active .fancybox__slide { padding-top: 4px !important; } " +
+        "  html.pg-active .fancybox__slide > * { margin-top: 0 !important; } }" +
+        "@media (max-width: 420px), (max-height: 700px) { " +
+        "  .pg-tip { padding: 12px 14px 10px; } " +
+        "  .pg-tip h3 { font-size: 1rem; margin-bottom: 6px; } " +
+        "  .pg-body { font-size: .875rem; line-height: 1.4; } " +
+        "  .pg-body p { margin-bottom: 8px; } " +
+        "  .pg-foot { margin-top: 10px; } }" +
         "@media (prefers-reduced-motion: reduce) { .pg-blocker, .pg-spot, .pg-tip { transition: none; } }";
 
     function buildUi() {
@@ -504,10 +519,28 @@
                 els[0].scrollIntoView({block: "nearest"});
             } catch (e) {
             }
+            ensureRoomFor(step);
         }
         position();
         try {
             tip.querySelector(".pg-next").focus();
+        } catch (e) {
+        }
+    }
+
+    // On small screens the tooltip may fit neither below nor above the target;
+    // scroll the target towards the top of the viewport to make room below
+    // (the tour adds bottom padding to the page so this is always possible)
+    function ensureRoomFor(step) {
+        const els = targetsOf(step);
+        if (!els.length) return;
+        const r = unionRect(els);
+        const h = tip.offsetHeight, gap = 14;
+        const vh = window.innerHeight;
+        if (r.bottom + gap + h + 8 <= vh) return; // fits below
+        if (r.top - gap - h >= 8) return; // fits above
+        try {
+            window.scrollBy({top: r.top - 64, behavior: "auto"});
         } catch (e) {
         }
     }
@@ -578,6 +611,8 @@
         } catch (e) {
         }
         initialTab = document.querySelector(".tabs > div.active");
+        initialScrollY = window.scrollY;
+        document.documentElement.classList.add("pg-active");
         const filter = document.getElementById("filter");
         initialFilter = filter ? filter.value : "";
         if (filter && filter.value) {
@@ -626,6 +661,11 @@
             ui.remove();
             ui = null;
             blocker = spot = tip = null;
+        }
+        document.documentElement.classList.remove("pg-active");
+        try {
+            window.scrollTo({top: initialScrollY, behavior: "auto"});
+        } catch (e) {
         }
     }
 
