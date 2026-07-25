@@ -121,7 +121,7 @@ function saveNumberplate(name, numberplate, usage, id) {
             document.getElementById(element.id).remove();
         }, {once: true}); // { once: true } auto-removes the listener after it runs
 
-    }, 2000);
+    }, 5000);
     return true;
 }
 
@@ -283,7 +283,7 @@ document.addEventListener("click", function (e) {
         let copied = document.createElement("div");
         copied.classList.add("copiedHighlight");
         copied.id = generateRandomString(10);
-        copied.innerHTML = "<em>Copied</em>";
+        copied.innerHTML = "<em>Copied to Clipboard</em>";
         e.target.insertAdjacentElement("afterend", copied);
         setTimeout(function () {
             const element = document.getElementById(copied.id);
@@ -299,7 +299,7 @@ document.addEventListener("click", function (e) {
                 element.removeEventListener("transitionend", onTransitionEnd);
             }, {once: true}); // { once: true } auto-removes the listener after it runs
 
-        }, 1000);
+        }, 5000);
     } else if (e.target.classList.contains("edit-entry")) {
         document.getElementById("addEditId").value = e.target.closest(".entry").dataset.id;
         document.getElementById("addEditName").value = e.target.closest(".entry").querySelector(".entry-name").innerText;

@@ -769,3 +769,7 @@ input[type=reset] {
     font-style: italic;
     text-transform: none;
 }
+
+#addEditNumberPlate {
+    text-transform: uppercase;
+}
